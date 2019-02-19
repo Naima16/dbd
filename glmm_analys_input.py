@@ -1,8 +1,8 @@
 #### construct the final array used in GLMM analyses (example OrderFamily_tab.tsv for family:order)
-#### sample, non focal lineage number, focal lineage sub-lineage number
-#### the index in line 45 corresponds to the taxonomic rank of the focal lineage
-###
-## NM 20 juin 2018
+#### with 3 columns : sample, non focal lineage number, focal lineage sub-lineage number
+#### 
+####
+#### NM 20 juin 2018
 ##########################################
 ##########################################
 
