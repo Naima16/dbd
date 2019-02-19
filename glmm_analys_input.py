@@ -21,7 +21,7 @@ def list_taxonomy(df, index):
 f= open("listeOrderFamily.tsv","a")
 
 ####dbd_analys_input.py output
-path_otus ='~/diversity_input_allsample.tsv'
+path_otus ='~/diversity_input_2k.tsv'
 liste_seq=pd.read_csv(path_otus,sep=',')
 
 ##### compter les order_type versus classes, sur la df liste_seq à deux colonne study : entier
