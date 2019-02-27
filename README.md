@@ -1,6 +1,6 @@
 # DBD in the EMP dataset
 
-1. Construct_fasta_per_sample.py : build the Fasta file for every sample from the EMP summary file. 
+1. Construct_fasta_per_sample.py : build Fasta files from the EMP summary file. 
 
 2. dbd_analys_input.py : associates for every sample, the taxonomic annotations of all the ASVs it contains. 
 
