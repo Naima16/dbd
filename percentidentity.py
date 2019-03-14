@@ -34,6 +34,6 @@ for root, dirs, filenames in os.walk(source):
 tableau_final.to_csv("tableau_identity_"+str(cpt)+".tsv")
 
 rapport=rapport.append({'percent':cpt,'max':max(tableau_final.nb_cluster),'min': min(tableau_final.nb_cluster),'mean':float("{0:.2f}".format(np.mean(tableau_final.nb_cluster.astype(np.float64)))),'median':np.median(tableau_final.nb_cluster.astype(np.float64))},ignore_index=True)
-  cpt = float("{0:.2f}".format(cpt + 0.01))
+cpt = float("{0:.2f}".format(cpt + 0.01))
 rapport.to_csv("rapport_percentIdentity_range_mean_median_2.tsv")
 
