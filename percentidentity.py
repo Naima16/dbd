@@ -9,7 +9,7 @@ import statistics
 import numpy as np
 
 ## The directory containing the 2000 fasta files 
-source = '/Users/naima/Diversification_rate_18mars/fasta_file_30mars' 
+source = '~/fasta_files' 
 rapport=pd.DataFrame(columns=['percent','max','min','mean','median'])
 tableau_final=pd.DataFrame(columns=['sample','nb_cluster'])
 cpt = 0.6  ### 60% identity 
