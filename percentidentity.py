@@ -19,22 +19,16 @@ while cpt <= 1 :
   
     for f in filenames:
      if os.path.splitext(f)[1] == '.fa':
-        #print (f)
         fullpath = os.path.join(source, f)
         log = open(fullpath, 'r')
         cmd = 'usearch -id ' +  str(cpt) + ' -cluster_fast ' + fullpath +  ' -uc results.uc'
-        #cmd='head '+ fullpath
         print(cmd)
         os.system(cmd)
         with open('results.uc', 'r') as f1:
             lines = f1.read().splitlines()
             last_line = lines[-1]
-            #print (last_line)
             nb_clust = int(last_line.split()[1])+1
-            #print('nb_cluster1', nb_cluster1)
             sample_name=os.path.splitext(f)[0]
-            #print(sample_name)
-            #print(f)
                 
         tableau_final=tableau_final.append({'sample':sample_name,'nb_cluster':nb_clust},ignore_index=True)
         
