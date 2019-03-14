@@ -7,7 +7,7 @@ require(ggplot2)
 require(ggpubr)
 require(effects)
 
-###read phylum:class data [sample,phylum_name,nb_phylum,nb_class] (output of glmm_analys_input.py) 
+### read phylum:class data [sample,phylum_name,nb_phylum,nb_class] (output of glmm_analys_input.py) 
 tab_phylatype=read.table("~/phyla_tab_2k.tsv",header=T,sep=",")
 tab_phylatype=as.data.frame(tab_phylatype)
 tab_phylatype$phylum_type=as.factor(tab_phylatype$phylum_type)
