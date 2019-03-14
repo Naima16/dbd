@@ -8,4 +8,6 @@
 
 4. percentidentity.py : clusters ASVs by different percent identity using USEARCH.
 
+5. figure4.r : plot the figure 4 using GLMMs output (1: glmm with the interaction between diversity and biome as fixed effect to predict diversification (supplementary, file1, section 5), and 2: the GLMM of the genome size analysis (supplementary, file1, section 5)
+
 
