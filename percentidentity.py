@@ -12,10 +12,9 @@ import numpy as np
 source = '~/fasta_files' 
 rapport=pd.DataFrame(columns=['percent','max','min','mean','median'])
 tableau_final=pd.DataFrame(columns=['sample','nb_cluster'])
-cpt = 0.6  ### 60% identity 
+cpt = 0.9  ### 90% identity 
 
-while cpt <= 1 :
-  for root, dirs, filenames in os.walk(source):
+for root, dirs, filenames in os.walk(source):
   
     for f in filenames:
      if os.path.splitext(f)[1] == '.fa':
@@ -31,11 +30,10 @@ while cpt <= 1 :
             sample_name=os.path.splitext(f)[0]
                 
         tableau_final=tableau_final.append({'sample':sample_name,'nb_cluster':nb_clust},ignore_index=True)
-        
-  tableau_final.to_csv("tableau_identity_"+str(cpt)+".tsv")
+ 
+tableau_final.to_csv("tableau_identity_"+str(cpt)+".tsv")
 
-  rapport=rapport.append({'percent':cpt,'max':max(tableau_final.nb_cluster),'min': min(tableau_final.nb_cluster),'mean':float("{0:.2f}".format(np.mean(tableau_final.nb_cluster.astype(np.float64)))),'median':np.median(tableau_final.nb_cluster.astype(np.float64))},ignore_index=True)
+rapport=rapport.append({'percent':cpt,'max':max(tableau_final.nb_cluster),'min': min(tableau_final.nb_cluster),'mean':float("{0:.2f}".format(np.mean(tableau_final.nb_cluster.astype(np.float64)))),'median':np.median(tableau_final.nb_cluster.astype(np.float64))},ignore_index=True)
   cpt = float("{0:.2f}".format(cpt + 0.01))
-
 rapport.to_csv("rapport_percentIdentity_range_mean_median_2.tsv")
 
