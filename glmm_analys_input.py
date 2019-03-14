@@ -73,7 +73,7 @@ for i in range(0,len(liste_seq)):
   liste_order_type_family.to_csv(f)
   f.write('\n' )
   
-
+### table containing sample, order_name, nb_order and nb_family. this table is used to fit the GLMM
 total_tab.to_csv("OrderFamily_tab.tsv")
 f.close()   
 
