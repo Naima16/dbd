@@ -6,4 +6,6 @@
 
 3. glmm_analys_input.py : uses the output of dbd_analys_input.py to estimate diversification rate for every taxonomic ratio   (ASV:Genus, Genus:Family, Family:Order, Order:Class and Class:Phylum), as well as diversity (the number of non-focal lineages: non focal phyla, classes, orders, families and genera numbers).
 
+4. percent_identity.py : clusters ASVs by different percent identity using USEARCH.
+
 
