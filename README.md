@@ -14,6 +14,8 @@
 
 5. GLMM_CLASSperPHYLUM.R : Generalized linear mixed model for Class:Phylum ratio for diversity begets diversitification  analysis (Table 1) as well as DBD slope variation across different biomes analysis (Table 4-A).
 
-6. GLMM_animal.R : Generalized linear mixed model for ASV:Genus in animal cluster (resident-migrant analysis)
+6. GLMM_animal.R : Generalized linear mixed model for ASV:Genus in animal cluster (resident-migrant analysis).
+
+7. GLMM_saline.R : Generalized linear mixed model for ASV:Genus in saline cluster (resident-migrant analysis).
 
 
