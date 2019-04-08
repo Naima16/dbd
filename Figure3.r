@@ -43,8 +43,8 @@ require( ggplot2 )
 if(!require( lattice )) {install.packages("lattice")}
 require( lattice )
 
-
-data.genus=read_excel("/Users/naima/Projet_Diversification/Dernier_nov/native_migrates_archive/Genus&NbSample_perempo.xlsx", col_names  = TRUE)
+#### genus-level community composition
+data.genus=read_excel("~/Genus&NbSample_perempo.xlsx", col_names  = TRUE)
 data.genus=as.data.frame(data.genus)
 row.names(data.genus)=data.genus[,1]
 data.genus=data.genus[,-1]
@@ -89,8 +89,9 @@ fidg2$group[fidg2$group==3]="Saline"
 write.xlsx(fidg2,file="indval_dfs1.xlsx")
 
 #### corriger les noms de genera modifiés par indval
-vrai_nom=read_excel("/Users/naima/Projet_Diversification/Dernier_nov/native_migrate7avril/figure/indval_name.xlsx",col_names  = TRUE)
-
+#### indval changed the genera names with dot, brackets and space
+#### we need to give back the actual genera names
+vrai_nom=read_excel("~/indval_name.xlsx",col_names  = TRUE)
 
 for(i in 1:dim(fidg2)[1])
  if (rownames(fidg2)[i] %in% vrai_nom$name_indval)  
@@ -175,21 +176,21 @@ save(p3,file=("pca_plot.RData"))
 
 #####6 fev
 ### import GLMM results for animal group
-load("/Users/naima/Projet_Diversification/Dernier_nov/native_migrate7avril/glmm/animal/glmm_animal3.RData")
-load("/Users/naima/Projet_Diversification/Dernier_nov/native_migrate7avril/glmm/animal/datsc_animal.RData")
+load("~/glmm_animal3.RData")
+load("~/datsc_animal.RData")
 datsc1=datsc_animal
 eff=allEffects(glmer.full.3)
 
 #### import GLMM results for non saline group 
-load("/Users/naima/Projet_Diversification/Dernier_nov/native_migrate7avril/glmm/nonsaline/datsc_nonsalin.RData")
-load("/Users/naima/Projet_Diversification/Dernier_nov/native_migrate7avril/glmm/nonsaline/glmm_nonsaline3.RData")
+load("~/datsc_nonsalin.RData")
+load("~/glmm_nonsaline3.RData")
 datsc1=datsc_nonsalin
 eff1=allEffects(glmer.full.status.3)
 summary(glmer.full.status.3)
 
 ## import GLMM results for saline group
-load("/Users/naima/Projet_Diversification/Dernier_nov/native_migrate7avril/glmm/saline/datsc_saline.RData")
-load("/Users/naima/Projet_Diversification/Dernier_nov/native_migrate7avril/glmm/saline/glmer.full.status.Sal.signif.RData")
+load("~/datsc_saline.RData")
+load("~/glmer.full.status.Sal.signif.RData")
 datsc1=datsc_saline
 eff2=allEffects(glmer.full.status.Sal.2)
 
