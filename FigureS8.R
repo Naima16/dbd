@@ -1,6 +1,6 @@
 
 #### plots pour l'approche %identity
-####
+#### Figure S8
 
 theme_Publication <- function(base_size=14, base_family="Helvetica"){ #Comic Sans MS"){ ##helvetica") {
   library(grid)
@@ -30,9 +30,7 @@ theme_Publication <- function(base_size=14, base_family="Helvetica"){ #Comic San
             strip.background=element_rect(colour="#f0f0f0",fill="#f0f0f0"),
             strip.text = element_text(face="bold",size = 11)
     ))
-  
 }
-
 
 ##~/tableau_identity_1.0.tsv
 tab100=read.table("~/tableau_identity_1.0.tsv",header=T,sep=",")
@@ -79,33 +77,9 @@ tab=tab100_97
 tab100_97$nb_100=tab$nb_100/tab$nb_97
 
 ##################
-##### linear models 85%~80%
-###
-fit=lm(nb_85 ~ nb_80, data = tab80_85)
-fit2=lm(nb_85 ~ poly(nb_80,3), data = tab80_85)
+##### linear, quadrati and cubic models 
 
-r1=signif(summary(fit)$adj.r.squared, 2)
-r2=signif(summary(fit2)$adj.r.squared, 2)
-
-fitquad=lm(nb_85 ~ poly(nb_80,2), data = tab80_85)
-rquad=signif(summary(fitquad)$adj.r.squared, 2)
-
-p85_80=ggplot(fit$model, aes_string(x = names(fit$model)[2], y = names(fit$model)[1])) +
-  geom_point(size=0.5) +
-  stat_smooth(method = "lm", se=TRUE,col = "dimgrey")+
-  stat_smooth(method = "lm", se=TRUE,formula=y ~ poly(x, 2, raw=TRUE),col = "blue")+
-  stat_smooth(method="lm",se=TRUE, formula=y ~ poly(x, 3, raw=TRUE),colour="red") +
-  labs(x="80% clusters",y="85% clusters")+
-  annotate(geom="label",x = -Inf, y = Inf,label = paste("Adj R2 : ",r1," ",rquad," ",r2),color="red", size = 3, 
-           vjust=1.2,hjust=0,fontface=2,fill = "white",label.size = 0)+
-  annotate(geom="label",x = -Inf, y = Inf,label = paste("Adj R2 : ",r1," ",rquad),color="blue", size = 3, 
-           vjust=1.2,hjust=0,fontface=2,fill = "white",label.size = 0)+
-  annotate( geom="label",x = -Inf, y = Inf,label = paste("Adj R2 : ",r1),color="dimgrey", size = 3, 
-            vjust=1.2,hjust=0,fontface=2,fill = "white",label.size = 0)+
-  theme_Publication()
-
-###linear models 80%~75% 
-
+### 80%~75%
 fit_0=lm(nb_80 ~ nb_75, data = tab80_75)
 fit_02=lm(nb_80 ~ poly(nb_75,3), data = tab80_75)
 r_10=signif(summary(fit_0)$adj.r.squared, 2)
@@ -128,6 +102,29 @@ p_80_75=ggplot(fit_0$model, aes_string(x = names(fit_0$model)[2], y = names(fit_
             vjust=1.2,hjust=0,fontface=2,fill = "white",label.size = 0)+
   theme_Publication()
 
+### 85%~80%
+fit=lm(nb_85 ~ nb_80, data = tab80_85)
+fit2=lm(nb_85 ~ poly(nb_80,3), data = tab80_85)
+
+r1=signif(summary(fit)$adj.r.squared, 2)
+r2=signif(summary(fit2)$adj.r.squared, 2)
+
+fitquad=lm(nb_85 ~ poly(nb_80,2), data = tab80_85)
+rquad=signif(summary(fitquad)$adj.r.squared, 2)
+
+p85_80=ggplot(fit$model, aes_string(x = names(fit$model)[2], y = names(fit$model)[1])) +
+  geom_point(size=0.5) +
+  stat_smooth(method = "lm", se=TRUE,col = "dimgrey")+
+  stat_smooth(method = "lm", se=TRUE,formula=y ~ poly(x, 2, raw=TRUE),col = "blue")+
+  stat_smooth(method="lm",se=TRUE, formula=y ~ poly(x, 3, raw=TRUE),colour="red") +
+  labs(x="80% clusters",y="85% clusters")+
+  annotate(geom="label",x = -Inf, y = Inf,label = paste("Adj R2 : ",r1," ",rquad," ",r2),color="red", size = 3, 
+           vjust=1.2,hjust=0,fontface=2,fill = "white",label.size = 0)+
+  annotate(geom="label",x = -Inf, y = Inf,label = paste("Adj R2 : ",r1," ",rquad),color="blue", size = 3, 
+           vjust=1.2,hjust=0,fontface=2,fill = "white",label.size = 0)+
+  annotate( geom="label",x = -Inf, y = Inf,label = paste("Adj R2 : ",r1),color="dimgrey", size = 3, 
+            vjust=1.2,hjust=0,fontface=2,fill = "white",label.size = 0)+
+  theme_Publication()
 
 ################# 90~85
 fit00=lm(nb_90~nb_85,tab85_90)
@@ -153,7 +150,7 @@ pp_90_85=ggplot(fit00$model, aes_string(x = names(fit00$model)[2], y = names(fit
   theme_Publication()
 
 
-#######
+####### 95%~90%
 fit000=lm(nb_95~nb_90,tab95_9)
 fit0002=lm(nb_95 ~ poly(nb_90,3), data = tab95_9)
 
@@ -180,8 +177,7 @@ p_95_90=ggplot(fit000$model, aes_string(x = names(fit000$model)[2], y = names(fi
   theme_Publication()
 
 
-###
-
+### 97%~95%
 fit0000=lm(nb_97~nb_95,tab95_97)
 fit00002=lm(nb_97 ~ poly(nb_95,3), data = tab95_97)
 r10000=signif(summary(fit0000)$adj.r.squared, 2)
@@ -206,8 +202,7 @@ p_97_95=ggplot(fit0000$model, aes_string(x = names(fit0000$model)[2], y = names(
   theme_Publication()
 
 
-################
-
+################ 100%~97%
 fit_50=lm(nb_100~nb_97,tab100_97)
 fit_502=lm(nb_100 ~ poly(nb_97,3), data = tab100_97)
 
@@ -233,8 +228,7 @@ p100_97=ggplot(fit_50$model, aes_string(x = names(fit_50$model)[2], y = names(fi
   theme_Publication()
 
 
-####
-
+#### plot
 require(ggpubr)
 pdf("FigureS8.pdf",width=8,heigh=6)
 ggarrange(p_80_75,p85_80,pp_90_85, p_95_90,p_97_95,p100_97,
