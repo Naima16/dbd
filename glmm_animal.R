@@ -63,7 +63,7 @@ df.native.final=unique(df.native[,c("sample","nb_genus")])
 #### colonne 4 = nb_genus
 df.animales=merge(df.final[,-4],df.native.final,by="sample")
 
-###ajouter un booleen pour native versus migrants
+###ajouter un booleen pour native/migrant/generalist
 for (i in 1: dim(df.animales)[1]) {
   if (df.animales[i,'genus_type'] %in% unique(animales$genus_type) )
       df.animales[i,'status'] = "Native"
@@ -101,8 +101,8 @@ save(glmm.anim.3,file="glmm_animal3.RData")
 summary(glmm.anim.3)
 
 
-###significance
-glmm.anim.3 = glmer(nb_ASV~nb_genus*status+(nb_genus|genus_type/empo_3)+ (nb_genus|empo_3:PI)+(nb_genus-1|sample),datsc1,family=poisson(link=log),control=glmerControl(optimizer="bobyqa"))
+### Random effect significance
+#glmm.anim.3 = glmer(nb_ASV~nb_genus*status+(nb_genus|genus_type/empo_3)+ (nb_genus|empo_3:PI)+(nb_genus-1|sample),datsc1,family=poisson(link=log),control=glmerControl(optimizer="bobyqa"))
 
 glmer.full.4 = glmer(nb_ASV~nb_genus*status+(nb_genus|genus_type/empo_3)+ (nb_genus|empo_3:PI),datsc1,family=poisson(link=log),control=glmerControl(optimizer="bobyqa"))
 
