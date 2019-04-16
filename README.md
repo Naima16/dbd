@@ -20,4 +20,6 @@
 
 8. GLMM_NonSaline.R : Generalized linear mixed model for ASV:Genus in non-saline cluster (resident-migrant analysis).
 
+9. identity_permtest.R : permutation test for diversification~diversity relationship in Nc percent identity analysis.
+
 
