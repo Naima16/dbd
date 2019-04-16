@@ -22,4 +22,6 @@
 
 9. identity_permtest.R : permutation test for diversification~diversity relationship in Nc percent identity analysis.
 
+10. FigureS10.R : plot Figure S10, linear, quadratic and cubic models for diversification~diversity relationship (Nc percent identity analysis)
+
 
