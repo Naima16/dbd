@@ -6,7 +6,7 @@
 
 3. glmm_analys_input.py : uses the output of dbd_analys_input.py to estimate diversification rate for every taxonomic ratio   (ASV:Genus, Genus:Family, Family:Order, Order:Class and Class:Phylum), as well as diversity (the number of non-focal lineages: non focal phyla, classes, orders, families and genera numbers).
 
-4. Figure 3 : does the indicator species analysis and the PCA, then plot 1) figure 3-A for visualizing the clustering and the indicator genera for every cluster; 2) figure 3-B using GLMM output (a GLMM for every environment cluster : animal-associated, saline and non-saline).
+4. Figure 3 : Indicator species analysis and PCA, and plot 1) figure 3-A for visualizing the clustering and the indicator genera for every cluster; 2) figure 3-B using GLMM output (a GLMM for every environment cluster : animal-associated, saline and non-saline).
 
 4. percentidentity.py : clusters ASVs by different percent identity using USEARCH.
 
