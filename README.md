@@ -12,7 +12,7 @@
 
 5. Figure4.r : plot the figure 4 using GLMMs output (1: glmm with the interaction between diversity and biome as fixed effect to predict diversification (supplementary, file1, section 5), and 2: the GLMM of the genome size analysis (supplementary, file1, section 5)
 
-5. GLMM_CLASSperPHYLUM.R : Generalized linear mixed model for Class:Phylum ratio for diversity begets diversitification  analysis (Table 1) as well as DBD slope variation across different biomes analysis (Table 4-A).
+5. GLMM_CLASSperPHYLUM.R : Generalized linear mixed model for diversity begets diversitification  analysis (Table 1) as well as DBD slope variation across different biomes analysis (Supplementary Data file 1 Section 4.3), for Class:Phylum ratio.
 
 6. GLMM_animal.R : Generalized linear mixed model for ASV:Genus in animal cluster (resident-migrant analysis).
 
