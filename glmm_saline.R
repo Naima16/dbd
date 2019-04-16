@@ -82,12 +82,15 @@ df.native.final=unique(df.native[,c("sample","nb_genus")])
 
 df.salines=merge(df.final[,-4],df.native.final,by="sample")
 
-###ajouter un booleen pour resident versus migrants
+###ajouter un booleen pour resident/migrant/generalist
 for (i in 1: dim(df.salines)[1]) {
   if (df.salines[i,'genus_type'] %in% unique(Saline$genus_type) )
     df.salines[i,'status'] = "Native"
   else
-    df.salines[i,'status'] = "Migrant"
+    if (df.salines[i,'genus_type'] %in% unique(nonsaline$genus_type) || df.salines[i,'genus_type'] %in% unique(animal$genus_type) )
+        df.salines[i,'status'] = "Migrant"
+    else
+      df.salines[i,'status'] = "Generalist"
 }
 
 df.salines$status=as.factor(df.salines$status)
@@ -102,55 +105,53 @@ datsc_saline=datsc1
 save(datsc_saline,file="datsc_saline.RData")
 
 #### full gLMM
-glmer.full.status.Sal.1 = glmer(nb_ASV~nb_genus*status+(nb_genus|genus_type/empo_3)+ (nb_genus|empo_3/PI)+(nb_genus|sample),datsc1,family=poisson(link=log),
+glmm.sal.1 = glmer(nb_ASV~nb_genus*status+(nb_genus|genus_type/empo_3)+ (nb_genus|empo_3/PI)+(nb_genus|sample),datsc1,family=poisson(link=log),
                            control=glmerControl(optimizer="bobyqa"))
-summary(glmer.full.status.Sal.1)
-save(glmer.full.status.Sal.1,file="glmm_saline1.RData")
+summary(glmm.sal.1)
+save(glmm.sal.1,file="glmm_saline_1.RData")
 
 
 ## enlever la singularité sur sample et empo_3 (le plus signiifcant)
-glmer.full.status.Sal.21 = glmer(nb_ASV~nb_genus*status+(nb_genus|genus_type/empo_3)+ (nb_genus|empo_3:PI)+ (nb_genus-1|empo_3)+(nb_genus-1|sample),datsc1,family=poisson(link=log),
+glmm.sal.2 = glmer(nb_ASV~nb_genus*status+(nb_genus|genus_type/empo_3)+ (nb_genus|empo_3:PI)+ (nb_genus-1|empo_3)+(nb_genus-1|sample),datsc1,family=poisson(link=log),
                                 control=glmerControl(optimizer="bobyqa"))
 
-summary(glmer.full.status.Sal.21)
-save(glmer.full.status.Sal.21,file="glmm_saline2.RData")
+summary(glmm.sal.2)
+save(glmm.sal.2,file="glmm_saline_2.RData")
 
 ###supprimer empo_3 car var 0
-glmer.full.status.Sal.2 = glmer(nb_ASV~nb_genus*status+(nb_genus|genus_type/empo_3)+ (nb_genus|empo_3:PI)+(nb_genus-1|sample),datsc1,family=poisson(link=log),
+glm.status3.2 = glmer(nb_ASV~nb_genus*status+(nb_genus|genus_type/empo_3)+ (nb_genus|empo_3:PI)+(nb_genus-1|sample),datsc1,family=poisson(link=log),
                                 control=glmerControl(optimizer="bobyqa"))
-save(glmer.full.status.Sal.2,file="glmer.full.status.Sal.signif.RData")
-
+save(glm.status3.2,file="glm.saline_3.RData")
+summary(glm.status3.2)
 
 ##tester la significance des random d'après ben bolker : https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html
-glmer.full.status.Sal.2 = glmer(nb_ASV~nb_genus*status+(nb_genus|genus_type/empo_3)+ (nb_genus|empo_3:PI)+(nb_genus-1|sample),datsc1,family=poisson(link=log),
-                                control=glmerControl(optimizer="bobyqa"))
+#glm.status3.2 = glmer(nb_ASV~nb_genus*status+(nb_genus|genus_type/empo_3)+ (nb_genus|empo_3:PI)+(nb_genus-1|sample),datsc1,family=poisson(link=log),
+  #                     control=glmerControl(optimizer="bobyqa"))
 
-glm1=update(glmer.full.status.Sal.2,.~nb_genus*status+(nb_genus|genus_type/empo_3)+ (nb_genus|empo_3:PI))
-glm2=update(glmer.full.status.Sal.2,.~nb_genus*status+(nb_genus|genus_type/empo_3))
+glm1=update(glm.status3.2,.~nb_genus*status+(nb_genus|genus_type/empo_3)+ (nb_genus|empo_3:PI))
+glm2=update(glm.status3.2,.~nb_genus*status+(nb_genus|genus_type/empo_3))
 glm3 <- lm(nb_ASV~nb_genus*status,datsc1)
-anova(glmer.full.status.Sal.2 ,glm1,glm2,glm3)
+anova(glm.status3.2 ,glm1,glm2,glm3)
 
-# Df   AIC   BIC logLik deviance     Chisq Chi Df Pr(>Chisq)    
-# glm3                     5 77116 77155 -38553    77106                                
-# glm2                    10 57313 57392 -28647    57293 19812.712      5  < 2.2e-16 ***
-# glm1                    13 57136 57239 -28555    57110   183.021      3  < 2.2e-16 ***
-# glmer.full.status.Sal.2 14 57106 57217 -28539    57078    31.823      1  1.689e-08 ***
 
-# interaction:
+# tester l'interaction:
 glmer.inter = glmer(nb_ASV~nb_genus+status+(nb_genus|genus_type/empo_3)+ (nb_genus|empo_3:PI)+(nb_genus-1|sample),datsc1,family=poisson(link=log),
-                                control=glmerControl(optimizer="bobyqa"))
-anova(glmer.full.status.Sal.2,glmer.inter)
+                    control=glmerControl(optimizer="bobyqa"))
+anova(glm.status3.2,glmer.inter)
+# Df   AIC   BIC logLik deviance  Chisq Chi Df Pr(>Chisq)    
+# glmer.inter   14 57123 57233 -28547    57095                             
+# glm.status3.2 16 57100 57226 -28534    57068 26.994      2  1.375e-06 ***
 
-overdisp_fun(glmer.full.status.Sal.2)
+overdisp_fun(glm.status3.2)
 # chisq        ratio          rdf            p 
 # 1.029538e+04 5.282932e-01 1.948800e+04 1.000000e+00 
 
-plot(fitted(glmer.full.status.Sal.2),residuals(glmer.full.status.Sal.2),xlab = "Fitted Values", ylab = "Residuals")
-qqnorm(scale(resid(glmer.full.status.Sal.2)),ylab="Residual quantiles",col="orange")
+plot(fitted(glm.status3.2),residuals(glm.status3.2),xlab = "Fitted Values", ylab = "Residuals")
+qqnorm(scale(resid(glm.status3.2)),ylab="Residual quantiles",col="orange")
 
 ##interacton plot
 require(sjPlot)
 pdf("saline.pdf")
-plot1=plot_model(glmer.full.status.Sal.2,type="int",terms=c("nb_genus","status"),title="Saline",show.legend = TRUE, axis.title=c("","ASV number/genus"),colors = c("black","red"))
+plot1=plot_model(glm.status3.2,type="int",terms=c("nb_genus","status"),title="Saline",show.legend = TRUE, axis.title=c("","ASV number/genus"),colors = c("black","red"))
 plot1
 dev.off()
