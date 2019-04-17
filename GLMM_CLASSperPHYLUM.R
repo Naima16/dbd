@@ -1,5 +1,5 @@
 ##### GLMM  Class:Phylum ratio
-##### 28 oct NM
+##### 28 oct 2018, NM
 
 if(!require(lme4)){install.packages("lme4")}
 require(lme4)
@@ -43,7 +43,7 @@ tab_emp$empo_1=as.factor(tab_emp$empo_1)
 tab_emp$empo_2=as.factor(tab_emp$empo_2)
 tab_emp$empo_3=as.factor(tab_emp$empo_3)
 
-###table des nb_phyla, phyla type et le nombre correspondant en classe pour chaque sample
+### table des nb_phyla, phyla type et le nombre correspondant en classe pour chaque sample
 tab_phylatype=read.table("~/phyla_tab_2k.tsv",header=T,sep=",")
 tab_phylatype=as.data.frame(tab_phylatype)
 tab_phylatype$phylum_type=as.factor(tab_phylatype$phylum_type)
