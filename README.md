@@ -24,7 +24,7 @@
 
 10. FigureS10.R : plot Figure S10, linear, quadratic and cubic models for diversification~diversity relationship (Nc percent identity analysis)
 
-11. glmm_abiotic_phylum_class.r : Abiotic factors GLMM for Class:Phylum ratio.
+11. glmm_abiotic_phylum_class.r : Abiotic factors GLMM for Class:Phylum ratio. This script may be used for any ratio, if the table with phyla count (diversity) and class:phyla ratio (diversification) for every phylum in all samples (line 33) is replaced (by diversity-diversification table for any other ratio (glmm_analys_input.py output)).
 
 12. glmm_GenomeSize.r : Genome size analysis.
 
