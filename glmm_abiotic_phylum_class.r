@@ -27,6 +27,9 @@ hist(subset.temp.ph$latitude_deg)
 hist(subset.temp.ph$elevation_m)
 hist(subset.temp.ph$temperature_deg_c)
 
+### this table contains phyla count (diversity) and class:phyla ratio (diversification) for every phylum in all samples
+### could be a diversity-diversification table for any other ratio.
+
 tab_phyla_class=read.table("/Users/naima/Projet_Diversification/Diversification_rate_18mars/phyla_tab_2k.tsv",header=T,sep=",")
 head(tab_phyla_class)
 df.sample=unique(tab_phyla_class$sample)
