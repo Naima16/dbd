@@ -26,4 +26,6 @@
 
 11. glmm_abiotic_phylum_class.r : Abiotic factors GLMM for Class:Phylum ratio.
 
+12. glmm_GenomeSize.r : Genome size analysis.
+
 
