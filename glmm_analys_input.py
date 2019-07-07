@@ -17,8 +17,6 @@ def list_otu_studies(df, index):
 def list_taxonomy(df, index):
     return(set([x.split('__')[1] for x in df.loc[index]['taxonomy'].split(';')]))
   
-## contient toutes les lineage de niveau i et lineage de niveau i-1 correspondantes    
-f= open("listeOrderFamily.tsv","a")
 
 ####dbd_analys_input.py output
 path_otus ='~/diversity_input_2k.tsv'
@@ -68,12 +66,10 @@ for i in range(0,len(liste_seq)):
   
   for k in range(0,len(liste_order_type_family)) :
        total_tab=total_tab.append({'sample':liste_seq.iloc[i,1],'order_type':liste_order_type_family.iloc[k,0],'nb_order': len(liste_order_type_family)-1,'nb_family':liste_order_type_family.iloc[k,2] },ignore_index=True)
-  f.write( liste_seq.iloc[i,1] + '\n' )
-  liste_order_type_family.to_csv(f)
-  f.write('\n' )
+  
   
 ### table containing sample, order_name, nb_order and nb_family. this table is used to fit the GLMM
 total_tab.to_csv("OrderFamily_tab.tsv")
-f.close()   
+   
 
      
