@@ -26,7 +26,6 @@ liste_seq=pd.read_csv(path_otus,sep=',')
 
 ##### compter les order_type versus classes, sur la df liste_seq à deux colonne study : entier
 ###### et taxonomy : chaine de caratere concatenation des taxonmy separée par "/t"
-tableau_final=pd.DataFrame(columns=['sample','nb_order','nb_family'])
 total_tab=pd.DataFrame(columns=['sample','order_type','nb_order','nb_family'])
 
 
