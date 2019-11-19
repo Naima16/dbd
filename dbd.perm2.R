@@ -1,13 +1,13 @@
 library(ggplot2)
 
 ###spiders. test example
-spiders = read.table("/Users/naima/DBD_permutation_EMP/16sept/script_finaux_18sept/biom_to_csv/25sept/Spiders_28x12_spe.txt")
+spiders = read.table("Spiders_28x12_spe.txt")
 genera = c("Alop", "Alop", "Alop", "Arct", "Arct", "Aulo", "Pard", "Pard", "Pard", "Pard", "Troc", "Zora")
 mat = as.matrix(spiders)
 genus=genera
 
-### emp
-EMP_data=read.csv("/Users/naima/Projet_Diversification/Dernier_nov/permutation_9oct_2019/DBD_permutation_EMP/16sept/script_finaux_18sept/biom_to_csv/EMP_table.from_biom_w_taxonomy.txt",header=T,sep="\t")
+### emp biome table
+EMP_data=read.csv("EMP_table.from_biom_w_taxonomy.txt",header=T,sep="\t")
 dim(EMP_data)
 
 emp1=EMP_data
@@ -30,8 +30,8 @@ ind_genus=which(colnames(emp2)=="genus")
 mat = t(emp2[,-c(ind_taxonomy,ind_genus)])
 genus=emp2$genus
 
-### C code import
-dyn.load("/Users/naima/DBD_permutation_EMP/1oct_resultfinaux_alltax/25sept_genus_Asv/sample2.so")
+### C code import to improve run time in the permutation loop
+dyn.load("sample2.so")
 
 
 nperm=99
