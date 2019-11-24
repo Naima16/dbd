@@ -15,6 +15,9 @@ require (vegan)
 if(!require(tidyr)){install.packages("tidyr")}
 require (tidyr)
 
+if(!require(ggplot2)){install.packages("ggplot2")}
+require (ggplot2)
+
 ### list of genera and their ASV counts estimated on the unrarefied dataset
 df.ASV=read.table("genus_asv_shanon_final/genus_ASV_list_unrare2.tsv",header=T,sep=",")
 df.data=df.ASV[,-1]
