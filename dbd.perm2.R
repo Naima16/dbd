@@ -59,9 +59,10 @@ dbd.perm2 <- function(mat, g, perm.method=1, nperm=999, nn.print=0,clock=TRUE)
 #
 # Three permutation methods are implemented –
 # Before computing mat2,
-# Method 1. Permute data in individual columns of mat1. (Model 1 in the paper)
-# Method 2. Permute data in individual rows of mat1. (Model 2 in the paper)
-#    ### Method 2 has low power. ###
+# Method 1. (Method A in the paper) Permute data in individual rows of mat1. (Model 2 in the paper)
+# Method 2. (Method B in the paper) Permute data in individual columns of mat1. (Model 1 in the paper)
+# 
+#    ### Method 1 has low power. ###
 
 # Value –
 # The output list comprises the following elements:
@@ -114,13 +115,13 @@ dbd.perm2 <- function(mat, g, perm.method=1, nperm=999, nn.print=0,clock=TRUE)
       
       mat1.perm = matrix(0,n,p)
       
-      ##this is model 1 in the paper
-      if(perm.method==1) { # Permute data in individual columns of mat1 (sites x species)
-        mat1.perm = .Call("sampleC_col_real",mat1)
-      }
-      ## this is model 2 in the paper
-      if(perm.method==2) { # Permute p/a data in individual rows of mat1 (sites x species)
+      ## this is model A in the paper
+      if(perm.method==1) { # Permute p/a data in individual rows of mat1 (sites x species)
         mat1.perm=.Call("sampleC_row_real",mat1)
+      }
+      ##this is model B in the paper
+      if(perm.method==2) { # Permute data in individual columns of mat1 (sites x species)
+        mat1.perm = .Call("sampleC_col_real",mat1)
       }
   
       # Create matrix "mat2" of sites x genera
