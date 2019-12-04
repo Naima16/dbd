@@ -1,6 +1,6 @@
 # Simulations for type 1 error.
 
-#We will permute the spiders data at random [I used method 1: Permute data in the entire matrix, and method 2, Permute data in individual columns], producing each time a data matrix in which H0 is certainly true. 
+#We will permute the spiders data at random [I used method A, Permute data in individual rows, method B, Permute data in individual columns], producing each time a data matrix in which H0 is certainly true. 
 #We will then run function dbd.perm2() and obtain the associated p-value.
 #We will repeat this simulation a large number of times and obtain an estimate of the proportion of the simulations where H0 was rejected at a variety of alpha rejection levels {0.01, 0.05, 0.10, 0.20}.
 
@@ -21,14 +21,13 @@ simul.type1.dbd = function(nsim=100, n=28, p=12, g=NULL, pg = 6, gen.method=1, p
     
     aa <- system.time({
       for(i in 1:nsim) {
-        if(perm.method==1) {
-          # Permute data in individual columns of mat1 (sites x species)
-          mat1.H0 = apply(mat1,2,sample)
-        }
-        if(perm.method==2) { # Permute p/a data in individual rows of mat1 (sites x species)
+        if(perm.method==1) { # Permute p/a data in individual rows of mat1 (sites x species), method A
           for(ii in 1:n) mat1.H0[ii,] = sample(mat1[ii,])
         }
-        
+        if(perm.method==2) {
+          # Permute data in individual columns of mat1 (sites x species) # method B
+          mat1.H0 = apply(mat1,2,sample)
+        }
         tmp = dbd.perm2(mat1.H0, g, perm.method=perm.method, nperm=999, clock=FALSE)
         out[i,] = c(tmp$Stat.out[1,1:2], tmp$p.val)
       }
@@ -84,15 +83,15 @@ dbd.perm2 <- function(mat, g, perm.method=1, nperm=999, nn.print=0,clock=TRUE)
       # if(perm.method==1) { # Permute p/a data in in the whole matrix mat1 (sites x species)
       #   mat1.perm=.Call("sampleC_all",mat1)
       # }
-      ##this is model 1 in the paper
-      if(perm.method==1) { # Permute data in individual columns of mat1 (sites x species)
-        mat1.perm = .Call("sampleC_col_real",mat1)
-      }
-      ## this is model 2 in the paper
-      if(perm.method==2) { # Permute p/a data in individual rows of mat1 (sites x species)
+      
+      ## this is model A in the paper
+      if(perm.method==1) { # Permute p/a data in individual rows of mat1 (sites x species)
         mat1.perm=.Call("sampleC_row_real",mat1)
       }
-      
+      ##this is model B in the paper
+      if(perm.method==2) { # Permute data in individual columns of mat1 (sites x species)
+        mat1.perm = .Call("sampleC_col_real",mat1)
+      }
       mat1.perm=.Call("presence_absence",mat1.perm)
       # Create matrix "mat2" of sites x genera
       mat2=.Call("produit",mat1.perm,A) ##produit matriciel
@@ -125,7 +124,7 @@ dbd.perm2 <- function(mat, g, perm.method=1, nperm=999, nn.print=0,clock=TRUE)
 
 genera = c("Alop", "Alop", "Alop", "Arct", "Arct", "Aulo", "Pard", "Pard", "Pard", "Pard", "Troc", "Zora")
 
-res1 = simul.type1.dbd(nsim=100, g=genera, gen.method=2,perm.method=2)
+res1 = simul.type1.dbd(nsim=100, g=genera, gen.method=1,perm.method=1)
 
 head(res1)
 res1$p.val
