@@ -1,0 +1,18 @@
+Hi Naima,
+the datasets are in the shape of emp2:
+
+nrows = 22014 #max no. of asvs
+ncols = 2000  #no. of samples
+
+all you need to do is append emp2$genus as a column to the matrix.
+
+The matrices are presence/absence datasets (0 or 1s), so if you sum down a column you get the number of ASVs in the sample.
+
+paData1 is generated with a Poisson distribution (lambda = 0.01 for the whole matrix). This always generates a negative sloped dataset.
+paData2 is generated using your site structure, i.e. each site has its own distribution. 
+So for every site (e.g. the first site is the first 81 samples) I chose a lambda from 0 to 0.01 and used it for those samples.
+Site 2 had 128 samples and they were all generated from the same distribution, and so on. This always generates a positive sloped dataset.
+I then applied DBD or EC to these two baseline datasets.
+
+The matrices with DBD or EC are 100%, meaning all elements were affected by DBD or EC (i.e. the effect is very strong).
+
