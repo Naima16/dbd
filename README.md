@@ -1,6 +1,6 @@
 # DBD in the EMP dataset
 
-1. summarize_otu_distributions.py : generates  otu_summary.tsv from biome table.
+1. summarize_otu_distributions.py : generates  otu_summary.tsv from biome table (this script is from Thompson et al. 2017).
 2. Construct_fasta_per_sample.py : builds Fasta files from the EMP summary file. 
 
 3. dbd_analys_input.py : for every sample, it associates the taxonomic annotations of all the ASVs it contains. 
