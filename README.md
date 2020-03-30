@@ -1,19 +1,20 @@
 # DBD in the EMP dataset
 
 1. summarize_otu_distributions.py : generates  otu_summary.tsv from biome table (this script is from Thompson et al. 2017).
-2. Construct_fasta_per_sample.py : builds Fasta files from the EMP summary file. 
 
-3. dbd_analys_input.py : for every sample, it associates the taxonomic annotations of all the ASVs it contains. 
+2. dbd_analys_input.py : for every sample, it associates the taxonomic annotations of all the ASVs it contains.  
 
-4. glmm_analys_input.py : uses the output of dbd_analys_input.py to estimate diversification rate for every taxonomic ratio   (ASV:Genus, Genus:Family, Family:Order, Order:Class and Class:Phylum), as well as diversity (the number of non-focal lineages: non focal phyla, classes, orders, families and genera numbers).
+3. glmm_analys_input.py : uses the output of dbd_analys_input.py to estimate diversification rate for every taxonomic ratio   (ASV:Genus, Genus:Family, Family:Order, Order:Class and Class:Phylum), as well as diversity (the number of non-focal lineages: non focal phyla, classes, orders, families and genera numbers).
 
-5. Figure 3 : Indicator species analysis and PCA, and plot 1) figure 3-A for visualizing the clustering and the indicator genera for every cluster; 2) figure 3-B using GLMM output (a GLMM for every environment cluster : animal-associated, saline and non-saline).
+4. GLMM_CLASSperPHYLUM.R : Generalized linear mixed model for diversity begets diversitification  analysis (Table 1) as well as DBD slope variation across different biomes analysis (Supplementary Data file 1 Section 4.3), for Class:Phylum ratio. For the other ratio, the table in line 47 have to be replaced by the appropriate diversity_diversification table (glmm_analys_input.py output).
 
-6. percentidentity.py : clusters ASVs by different percent identity using USEARCH.
+5. Construct_fasta_per_sample.py : builds Fasta files from the EMP summary file. 
 
-7. Figure4.r : plot the figure 4 using GLMMs output (1: glmm with the interaction between diversity and biome as fixed effect to predict diversification (supplementary, file1, section 5), and 2: the GLMM of the genome size analysis (supplementary, file1, section 5)
+6. Figure 3 : Indicator species analysis and PCA, and plot 1) figure 3-A for visualizing the clustering and the indicator genera for every cluster; 2) figure 3-B using GLMM output (a GLMM for every environment cluster : animal-associated, saline and non-saline).
 
-8. GLMM_CLASSperPHYLUM.R : Generalized linear mixed model for diversity begets diversitification  analysis (Table 1) as well as DBD slope variation across different biomes analysis (Supplementary Data file 1 Section 4.3), for Class:Phylum ratio. For the other ratio, the table in line 47 have to be replaced by the appropriate diversity_diversification table (glmm_analys_input.py output).
+7. percentidentity.py : clusters ASVs by different percent identity using USEARCH.
+
+8. Figure4.r : plot the figure 4 using GLMMs output (1: glmm with the interaction between diversity and biome as fixed effect to predict diversification (supplementary, file1, section 5), and 2: the GLMM of the genome size analysis (supplementary, file1, section 5)
 
 9. GLMM_animal.R : Generalized linear mixed model for ASV:Genus in animal cluster (resident-migrant analysis).
 
