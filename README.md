@@ -29,6 +29,6 @@
 14. glmm_abiotic_phylum_class.r : Abiotic factors GLMM for Class:Phylum ratio. This script may be used for any ratio, if the table with phyla count (diversity) and class:phyla ratio (diversification) for every phylum in all samples (line 33) is replaced (by diversity-diversification table for any other ratio (glmm_analys_input.py output)).
 
 15. glmm_GenomeSize.r : Genome size analysis.
-16. permute_ASVs_synthetic.pl : simulation of the rarefaction effect on taxonomic ratios for phylum and genus levels.
+16. permute_ASVs_synthetic.pl : Rarefaction simulation.
 
 
